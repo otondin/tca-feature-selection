@@ -1,2 +1,74 @@
 # tca-feature-selection
 A Single and Multi Selections Feature written using The Composable Architecture
+
+## Examples:
+
+### Single Selection
+
+```swift
+import SwiftUI
+import ComposableArchitecture
+import FeatureSelection
+
+struct MySingleSelectionScreen<Item: SelectableItemProtocol>: View {
+    store: StoreOf<SingleSelectionFeature<Item>>
+    
+    init(store: StoreOf<SingleSelectionFeature<Item>>) {
+        self.store = store
+    }
+    
+    var body: some View {
+        WithViewStore(store, observe: { $0.items }) { viewStore in
+            ForEach(viewStore.state) { item in
+                HStack {
+                    Text(item.title)
+                    Spacer()
+                    if viewStore.state.isItemSelected(item) {
+                        Image(systemName: "checkmark")
+                    }
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    viewStore.send(.setSelectedItem(item))
+                }
+                Divider()
+            }
+        }
+    }
+}
+```
+
+### Multi Selection
+
+```swift
+import SwiftUI
+import ComposableArchitecture
+import FeatureSelection
+
+struct MySingleSelectionScreen<Item: SelectableItemProtocol>: View {
+    store: StoreOf<MultiSelectionFeature<Item>>
+    
+    init(store: StoreOf<MultiSelectionFeature<Item>>) {
+        self.store = store
+    }
+    
+    var body: some View {
+        WithViewStore(store, observe: { $0.items }) { viewStore in
+            ForEach(viewStore.state) { item in
+                HStack {
+                    Text(item.title)
+                    Spacer()
+                    if viewStore.state.isItemSelected(item) {
+                        Image(systemName: "checkmark")
+                    }
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    viewStore.send(.setSelectedItem(item))
+                }
+                Divider()
+            }
+        }
+    }
+}
+```
