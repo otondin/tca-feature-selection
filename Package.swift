@@ -15,9 +15,6 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(path: "../Models"),
-        .package(path: "../Localization"),
-
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.5.0"),
     ],
     targets: [
@@ -26,9 +23,6 @@ let package = Package(
         .target(
             name: "FeatureSelection",
             dependencies: [
-                "Models",
-                "Localization",
-
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]
         ),
