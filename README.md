@@ -19,20 +19,23 @@ struct MySingleSelectionScreen<Item: SelectableItemProtocol>: View {
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            ForEach(viewStore.items) { item in
-                HStack {
-                    Text(item.title)
-                    Spacer()
-                    if viewStore.state.isItemSelected(item) {
-                        Image(systemName: "checkmark")
+            VStack(spacing: 8) {
+                ForEach(viewStore.items) { item in
+                    HStack {
+                        Text(item.title)
+                        Spacer()
+                        if viewStore.state.isItemSelected(item) {
+                            Image(systemName: "checkmark")
+                        }
                     }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        viewStore.send(.setSelectedItem(item))
+                    }
+                    Divider()
                 }
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    viewStore.send(.setSelectedItem(item))
-                }
-                Divider()
             }
+            .padding(8)
         }
     }
 }
@@ -45,7 +48,7 @@ import SwiftUI
 import ComposableArchitecture
 import FeatureSelection
 
-struct MySingleSelectionScreen<Item: SelectableItemProtocol>: View {
+struct MyMultiSelectionScreen<Item: SelectableItemProtocol>: View {
     store: StoreOf<MultiSelectionFeature<Item>>
     
     init(store: StoreOf<MultiSelectionFeature<Item>>) {
@@ -54,20 +57,23 @@ struct MySingleSelectionScreen<Item: SelectableItemProtocol>: View {
     
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            ForEach(viewStore.items) { item in
-                HStack {
-                    Text(item.title)
-                    Spacer()
-                    if viewStore.state.isItemSelected(item) {
-                        Image(systemName: "checkmark")
+            VStack(spacing: 8) {
+                ForEach(viewStore.items) { item in
+                    HStack {
+                        Text(item.title)
+                        Spacer()
+                        if viewStore.state.isItemSelected(item) {
+                            Image(systemName: "checkmark")
+                        }
                     }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        viewStore.send(.setSelectedItem(item))
+                    }
+                    Divider()
                 }
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    viewStore.send(.setSelectedItem(item))
-                }
-                Divider()
             }
+            .padding(8)
         }
     }
 }
