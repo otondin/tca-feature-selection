@@ -1,5 +1,5 @@
 # tca-feature-selection
-A Single and Multi Selections Feature written using The Composable Architecture
+A Single Item Selection and Multi Items Selection Feature written using The Composable Architecture
 
 ## Examples:
 
