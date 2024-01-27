@@ -18,8 +18,8 @@ struct MySingleSelectionScreen<Item: SelectableItemProtocol>: View {
     }
     
     var body: some View {
-        WithViewStore(store, observe: { $0.items }) { viewStore in
-            ForEach(viewStore.state) { item in
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            ForEach(viewStore.items) { item in
                 HStack {
                     Text(item.title)
                     Spacer()
@@ -53,8 +53,8 @@ struct MySingleSelectionScreen<Item: SelectableItemProtocol>: View {
     }
     
     var body: some View {
-        WithViewStore(store, observe: { $0.items }) { viewStore in
-            ForEach(viewStore.state) { item in
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            ForEach(viewStore.items) { item in
                 HStack {
                     Text(item.title)
                     Spacer()
